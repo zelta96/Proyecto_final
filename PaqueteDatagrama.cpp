@@ -1,32 +1,54 @@
-# include "PaqueteDatagrama.h"
-# include <string.h>
-using namespace std;
- PaqueteDatagrama::PaqueteDatagrama(char* cadena, unsigned int sizeCadena , char *IPDestino, int Puerto ){
-   datos = new char [sizeCadena];
-   memcpy(datos,cadena,sizeCadena);
-   strcpy(ip,IPDestino);
-   longitud = sizeCadena ;
-   puerto = Puerto;
+#include "PaqueteDatagrama.h"
+
+PaqueteDatagrama::PaqueteDatagrama(char * cadena, unsigned int tam, const char * dir, int port)
+:longitud(tam),puerto(port)
+{
+    datos = new char[tam];
+    memcpy(datos,cadena,tam);
+    strcpy(ip,dir);
 }
-/// mensaje vacio 
- PaqueteDatagrama::PaqueteDatagrama(unsigned int sizeMsg )
- {
-   longitud = sizeMsg;
-   datos = new char[sizeMsg];
-  }
-PaqueteDatagrama::~PaqueteDatagrama(){
-  delete datos;
+
+PaqueteDatagrama::PaqueteDatagrama(unsigned int tam):longitud(tam)
+{
+    datos = new char[tam];
 }
-char* PaqueteDatagrama::obtieneDireccion(){return ip; }
-unsigned int PaqueteDatagrama:: obtieneLongitud(){return longitud;}
-int PaqueteDatagrama::obtienePuerto(){return puerto;}
-char* PaqueteDatagrama::obtieneDatos(){return datos;}
-void PaqueteDatagrama:: inicializaPuerto(int p){puerto = p;}
-void PaqueteDatagrama:: inicializaIp(char *IPDestino){ strcpy(ip,IPDestino);}
-void PaqueteDatagrama:: inicializaDatos(char *msg){
-  memcpy(&datos,&msg,sizeof(int)*longitud);
-  // printf("datos en la funcion %d ",datos);
+
+PaqueteDatagrama::~PaqueteDatagrama() // Destructor
+{
+    delete [] datos;
 }
-std::ostream& operator<<(std::ostream& os, PaqueteDatagrama& p){
-  os<<endl<<"IP: "<<p.obtieneDireccion()<<"\tPuerto :"<<p.obtienePuerto()<<"\t Tamanio mensaje : "<<p.obtieneLongitud()<<endl;
+
+char *PaqueteDatagrama::obtieneDireccion()
+{
+    return ip;
+}
+
+unsigned int PaqueteDatagrama::obtieneLongitud()
+{
+    return longitud;
+}
+
+int PaqueteDatagrama::obtienePuerto()
+{
+    return puerto;
+}
+
+char *PaqueteDatagrama::obtieneDatos()
+{
+    return datos;
+}
+
+void PaqueteDatagrama::inicializaPuerto(int port)
+{
+    puerto = port;
+}
+
+void PaqueteDatagrama::inicializaIp(char * dir)
+{
+    strcpy(ip,dir);
+}
+
+void PaqueteDatagrama::inicializaDatos(char * cadena)
+{
+    memcpy(datos,cadena,longitud);
 }
