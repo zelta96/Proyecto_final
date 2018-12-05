@@ -30,9 +30,9 @@ s_http_server_opts.document_root = "."; // Serve current directory
 s_http_server_opts.enable_directory_listing = "yes";
 
 //archivo
-int ba = O_WRONLY|O_TRUNC|O_CREAT;
+int ba = O_RDONLY|O_TRUNC|O_CREAT;
 mode_t modo=0666;
-Archivo info("votos.txt",ba,modo);
+Archivo info("Casino-Nicholas_Pileggy.txt",ba,modo);
 Solicitud solicitud;
 char argumentos[4000];
 char ip[16] = "127.0.0.1";
