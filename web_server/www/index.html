@@ -1,24 +1,25 @@
 <html>
 	<head>
-		<title>GooglESCOM</title>
+		<title>Equipo9_UkraFest</title>
 		<script src="jquery.min.js"></script>
 	</head>
-	<body style="font-family:arial;">
+	<body style="font-family:cursive;">
 		<div style="text-align:center">
-			<h1>GooglESCOM</h1>
-			
+			<h1>Equipo 9</h1>
+			</div>
+			<div style="text-align:center">
 			<form method="post" enctype="multipart/form-data" action="/upload" id="form-file" class="block">
-				<h2>Subir archivo</h2>
+				<h2>Seleccionar el Archivo</h2>
 				<input type="file" accept="text/*" name="file"><br><br>
-				<button>Guardar</button>
+				<button>Subir Archivo</button>
 			</form>
 			
 			<form method=get id="form-search" class="block">
-				<h2>Buscar cadena</h2>
+				<h2>Numero de Palabras Palindromas</h2>
 				<input type="text" id="search" name="search"><br><br>
 				<button>Buscar</button>
 			</form>
-			<div class="block" id="search-res"></div>
+			<div class="block1" id="search-res"></div>
 		</div>
 	</body>
 </html>
@@ -27,7 +28,7 @@
 	$("#search-res").hide();
 	$('#form-search').submit(function(){
 		$("#search-res").show();
-		$("#search-res").html("<img src='load.gif' width=50/>");
+		$("#search-res").html("<img src='holi.gif' width=150/>");
 		$.ajax({
 			type: "POST",
 			url: "/search",
@@ -44,29 +45,49 @@
 
 <style>
 	h1{
-		color:#009D9D;
+		color: #ffffff;
+		font: small-caps 250%/90% serif;
+	}
+	h2{
+		color: #000;
+		font: small-caps 100%/50% serif;
 	}
 	body{
-		background-color:#004242;
+		background-color:  #000000;
 	}
-	.block{
-		background-color:#006D6D;
-		padding:20px;
-		margin-left:25%;
-		margin-right:25%;
-		border-radius:10px;
+
+
+	.block
+	{
+		background-color: #ffffff;
+		padding: 18px;
+		margin-left: 1px;
+		margin-right: 1px;
+		border-radius: 20px;
+	}
+	.block1
+	{
+		background-color: #000000;
+		padding: 1px;
+		margin-left: 1px;
+		margin-right: 1px;
+		border-radius: 20px;
 	}
 	button{
-		background-color:#005959;
-		border:0;
-		padding:10px;
-		border-radius:10px;
-		color:#009D9D;
+		background-color: #000;
+		border: 10px;
+		padding: 20px;
+		border-radius: 5px;
+		color: #fff;
+		width: 200px;
+		text-align: center;
+		font: small-caps 100%/50% serif;
 	}
 	#search{
-		height:40px;
-		font-size:20px;
-		width:300px;
-		border-radius:10px;
+		height: 30px;
+		font-size: 20px;
+		width: 200px;
+		border-radius: 10px;
+		font: small-caps 100%/50% serif;
 	}
 </style>
