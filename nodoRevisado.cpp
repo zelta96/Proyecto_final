@@ -27,6 +27,55 @@ struct operacion{
 	char arg[255];
 };
 
+
+std::vector<std::string> split(std::string strToSplit, char delimeter)
+{
+    std::stringstream ss(strToSplit);
+    std::string item;
+    std::vector<std::string> splittedStrings;
+    while (std::getline(ss, item, delimeter))
+    {
+       splittedStrings.push_back(item);
+    }
+    return splittedStrings;
+}
+
+
+string Freversa(string p){
+ string r;
+ for(int i = p.size()-1; i >= 0; i--)
+  r += p[i];
+ return r;
+}
+
+int palindromo(string palabra){
+    int l = 0, h = palabra.length(); 
+   
+    for (int i = 0; i < h; i++) 
+        palabra[i] = tolower(palabra[i]); 
+   
+    while (l <= h) { 
+
+
+   
+        if (!(palabra[l] >= 'a' && palabra[l] <= 'z')) 
+            l++; 
+   
+
+        else if (!(palabra[h] >= 'a' && palabra[h] <= 'z')) 
+            h--; 
+   
+        else if (palabra[l] == palabra[h]) 
+            l++, h--; 
+
+        else
+            return 1;
+    } 
+   
+    return 0; 
+
+}
+
 void getCurrentAddr(char * res){
 	int fd;
     struct ifreq ifr;
@@ -87,7 +136,7 @@ int main(int argc, char const *argv[]){
 			}
 			case 1: { // Busqueda
 				cout << "Recibi Query ["<< op_recv.arg <<"] Buscando..." << endl;
-				createIndex();
+				/*createIndex();
 				vector<pair<string,pair<int,int> > > found;
 				string arg(op_recv.arg);
 				found = searchInIndexFileByParts("INDEXFILE",arg,op_recv.v1,op_recv.v2);
@@ -99,15 +148,66 @@ int main(int argc, char const *argv[]){
 					memcpy(encontrado.arg,found[i].first.c_str(),found[i].first.size()+1);
 					PaqueteDatagrama p5((char*)&encontrado,sizeof(struct operacion),p3.obtieneDireccion(),9444);
 					s_send.envia(p5);
-				}
-				cout << "Encontradas " << found.size() << " coincidencias." << endl;
-				encontrado.op  = 3;
+				}*/
+
+				int limiteMin;
+  				int limiteMax;
+				limiteMax=(int) *op_recv.arg;
+
+				 ifstream ficheroEntrada;
+				string frase;
+ 				ficheroEntrada.open ("doc.txt");
+				 getline(ficheroEntrada, frase);
+ 				ficheroEntrada.close();
+ 				int countChar = frase.length();
+
+         
+				 cout << "Frase leida: " << countChar << endl;
+
+				vector<string> v = split (frase, '-');
+
+				string resultadoCadena;
+int ndoble = 34911;
+for (int k = 0; k < 34911; k++)
+{
+  
+for (int i = 0; i < v.size() - ndoble  ; i++)
+{
+  for (int j = i; j < i + ndoble     ; j++)
+  {
+   
+    resultadoCadena = resultadoCadena + v[j];
+   //  cout << "Palabra analizads: " << resultadoCadena << endl;
+  }
+  if(Freversa(resultadoCadena)==resultadoCadena){
+
+    cout << "Encontrado Palindromo: " << resultadoCadena << endl;
+    resultadoCadena = "";
+  }
+  else{
+    resultadoCadena = "";
+  }
+  
+}
+
+ndoble--;
+if (ndoble==1)
+{
+  break;
+}
+
+}
+cout << "tamaño std::vector<char> v;: " << v.size() << endl;
+    cout << "\nCalculando" << endl;
+
+				cout << "Encontradas " << limiteMax << " coincidencias." << endl;
+				/*encontrado.op  = 3;
 				encontrado.v1  = 0;
 				encontrado.v2  = 0;
 				memcpy(encontrado.arg,"END",4);
 
 				PaqueteDatagrama p6((char*)&encontrado,sizeof(encontrado),p3.obtieneDireccion(),p3.obtienePuerto());
-				s_send.envia(p6);
+				s_send.envia(p6);*/
 				break;
 			}
 			case 4: {
